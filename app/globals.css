@@ -1,26 +1,247 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  min-height: 100vh;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.header h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.header p {
+  font-size: 13px;
+  color: #666666;
+}
+
+/* Kalkulator Card */
+.calculator {
+  background-color: #171717;
+  border: 1px solid #333333;
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Display */
+.display {
+  background-color: #0a0a0a;
+  border: 1px solid #333333;
+  border-radius: 20px;
+  padding: 28px 24px;
+  margin-bottom: 28px;
+  min-height: 118px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.display-text {
+  font-family: "Space Grotesk", monospace;
+  font-size: 68px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-align: right;
+  line-height: 1;
+  color: #ffffff;
+}
+
+/* Buttons Grid */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.btn {
+  height: 68px;
+  border-radius: 18px;
+  font-size: 24px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.92);
+}
+
+/* Warna Tombol */
+.btn-clear {
+  background-color: #27272a;
+  color: #ef4444;
+}
+.btn-operator {
+  background-color: #27272a;
+  color: #22d3ee;
+}
+.btn-number {
+  background-color: #27272a;
+  color: #ffffff;
+}
+.btn-equal {
+  background: linear-gradient(135deg, #f97316, #eab308);
+  color: white;
+  font-weight: 700;
+  font-size: 32px;
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.5);
+}
+
+.btn:hover {
+  filter: brightness(1.15);
+}
+
+/* History */
+.history {
+  margin-top: 32px;
+  background-color: #171717;
+  border: 1px solid #333333;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.history h3 {
+  color: #888888;
+  font-size: 14px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.history-item {
+  background-color: #0f0f0f;
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  border-left: 3px solid #f97316;
+  color: #cccccc;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal {
+  background-color: #171717;
+  border: 1px solid #444444;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 360px;
+  padding: 40px 28px;
+  text-align: center;
+  animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.75) translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal h2 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.modal p {
+  color: #888888;
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+.modal .expression {
+  background-color: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 16px;
+  padding: 20px;
+  font-size: 28px;
+  font-family: monospace;
+  margin-bottom: 32px;
+  color: #ffffff;
+}
+
+.pay-btn {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #f97316, #eab308);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pay-btn:active {
+  transform: scale(0.96);
+}
+
+.cancel-btn {
+  color: #888888;
+  background: none;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.confetti {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
 }
